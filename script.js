@@ -36,6 +36,7 @@
   function showScene(id) {
     document.querySelectorAll(".scene").forEach((s) => s.classList.remove("active"));
     $(id).classList.add("active");
+    window.scrollTo(0, 0);
   }
 
   /* ---- SCENE 1: intro ---- */
