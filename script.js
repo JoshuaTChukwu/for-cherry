@@ -40,6 +40,13 @@
 
   /* ---- SCENE 1: intro ---- */
   function buildIntro() {
+    const photo = $("herPhoto");
+    if (C.herPhoto) {
+      photo.src = C.herPhoto;
+      photo.alt = C.herName || "";
+      photo.classList.remove("hidden");
+      photo.onerror = () => photo.classList.add("hidden");
+    }
     const box = $("introLines");
     const lines = C.intro || [];
     box.innerHTML = "";
@@ -150,7 +157,11 @@
 
       const stub = document.createElement("div");
       stub.className = "flight-stub";
+      const photoHtml = C.herPhoto
+        ? '<img class="flight-photo" src="' + C.herPhoto + '" alt="" onerror="this.remove()"/>'
+        : "";
       stub.innerHTML =
+        photoHtml +
         '<span>Passenger · ' + (C.herName || "") + '</span><span>' + (chosenDate || "") + "</span>";
 
       fc.append(title, route, msg, stub);

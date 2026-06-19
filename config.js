@@ -19,6 +19,11 @@ const CONFIG = {
   // Shown in the browser tab.
   pageTitle: "A little question for you… 💌",
 
+  // Her photo. Drop an image file next to this file (e.g. cherry.jpg) and
+  // put its name here. It shows as a glowing circle on the opening screen
+  // and on her flight ticket. Leave "" for no photo.
+  herPhoto: "cherry.jpg",
+
 
   /* ---------------------------------------------------------------------
      2. THE OPENING — messages that fade in one by one before the question.
