@@ -99,8 +99,8 @@ const CONFIG = {
   // `rsvpType` to "whatsapp", "sms", "email", or "" (to hide the button).
   rsvpType: "whatsapp",
   rsvpButton: "Tell me yes again 😄",
-  rsvpPhone: "1234567890",            // your number, country code + number, digits only (for whatsapp/sms)
-  rsvpEmail: "you@example.com",       // used only if rsvpType is "email"
+  rsvpPhone: "+2348143173379",            // your number, country code + number, digits only (for whatsapp/sms)
+  rsvpEmail: "jchukwu61@gmail.com",       // used only if rsvpType is "email"
   rsvpPrefilled: "Yes! I'd love to go on that date 💕",
 
 
