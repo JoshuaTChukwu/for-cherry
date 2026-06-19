@@ -1,0 +1,315 @@
+/* Theme variables are set from config.js at runtime (see script.js).
+   These are just fallbacks. */
+:root {
+  --bg1: #1a0b2e;
+  --bg2: #3d1a4d;
+  --accent: #ff5d8f;
+  --yes: #2ecc71;
+  --text: #fff5f8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: var(--text);
+  background: linear-gradient(160deg, var(--bg1), var(--bg2));
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* ---------- Scenes ---------- */
+#stage {
+  width: 100%;
+  max-width: 640px;
+  padding: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.scene {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  animation: sceneIn 0.7s ease both;
+}
+.scene.active { display: flex; }
+
+@keyframes sceneIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Intro ---------- */
+.intro-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 30vh;
+  justify-content: center;
+}
+.intro-lines p {
+  font-size: clamp(1.25rem, 5vw, 2rem);
+  line-height: 1.45;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: lineIn 0.8s ease forwards;
+}
+@keyframes lineIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Question ---------- */
+.question {
+  font-size: clamp(1.8rem, 7vw, 3rem);
+  line-height: 1.3;
+  font-weight: 700;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+
+.ask-buttons {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  min-height: 90px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: inherit;
+  font-size: clamp(1.05rem, 4vw, 1.4rem);
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  padding: 16px 38px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.3s ease;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.3);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: scale(0.96); }
+
+.btn-accent {
+  background: var(--accent);
+}
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(0,0,0,0.4); }
+
+.btn-yes {
+  background: var(--yes);
+  transform-origin: center;
+}
+.btn-yes:hover { filter: brightness(1.08); }
+
+.btn-no {
+  background: rgba(255,255,255,0.16);
+  backdrop-filter: blur(4px);
+  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), font-size 0.25s ease, padding 0.25s ease, left 0.25s ease, top 0.25s ease;
+  position: relative;
+}
+
+/* ---------- Date picker ---------- */
+.date-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 360px;
+}
+.date-option {
+  font-family: inherit;
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.18s ease, background 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  backdrop-filter: blur(6px);
+}
+.date-option:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.15);
+  border-color: var(--accent);
+}
+.date-option .opt-label { font-size: 1.25rem; font-weight: 700; }
+.date-option .opt-when { font-size: 0.95rem; opacity: 0.8; }
+
+/* ---------- Flight boarding pass ---------- */
+.flight-card {
+  width: 100%;
+  background: rgba(255,255,255,0.96);
+  color: #2a1438;
+  border-radius: 20px;
+  padding: 22px 24px;
+  text-align: left;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+  animation: pop 0.6s cubic-bezier(.34,1.56,.64,1) both;
+}
+.flight-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 8px;
+  background: var(--accent);
+}
+.flight-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.flight-route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 14px 0;
+  font-weight: 800;
+}
+.flight-route .city { font-size: 1.15rem; flex: 1; }
+.flight-route .city:last-child { text-align: right; }
+.flight-route .plane { font-size: 1.4rem; opacity: 0.6; }
+.flight-msg { font-size: 1rem; line-height: 1.5; opacity: 0.85; }
+.flight-stub {
+  margin-top: 16px;
+  border-top: 2px dashed rgba(42,20,56,0.25);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* ---------- Reveal ---------- */
+.yes-title {
+  font-size: clamp(2.2rem, 9vw, 4rem);
+  animation: pop 0.6s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes pop {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.yes-message {
+  font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+  line-height: 1.5;
+  max-width: 30ch;
+}
+
+.date-card {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 22px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+.date-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+}
+.date-row .label {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 2px;
+}
+.date-row .icon { font-size: 1.5rem; line-height: 1; }
+.date-note {
+  font-style: italic;
+  opacity: 0.92;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 16px;
+  font-size: clamp(0.95rem, 3.8vw, 1.1rem);
+}
+
+.closing {
+  font-size: clamp(1.2rem, 5vw, 1.7rem);
+  font-weight: 700;
+}
+
+/* ---------- Music toggle ---------- */
+.music-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease;
+}
+.music-toggle:hover { transform: scale(1.08); }
+.music-toggle.playing { animation: spin 4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Hearts ---------- */
+#hearts {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.heart {
+  position: absolute;
+  bottom: -40px;
+  font-size: 22px;
+  opacity: 0;
+  animation: floatUp linear forwards;
+}
+@keyframes floatUp {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6) rotate(0deg); }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translateY(-110vh) scale(1.1) rotate(40deg); }
+}
+
+/* ---------- Confetti ---------- */
+#confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hidden { display: none !important; }
